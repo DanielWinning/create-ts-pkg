@@ -1,7 +1,7 @@
-# Create TS App
+# Create TS Package
 
 <!-- Version Badge -->
-<img src="https://img.shields.io/badge/Version-1.3.0-blue" alt="Version 1.3.0">
+<img src="https://img.shields.io/badge/Version-1.0.0-blue" alt="Version 1.0.0">
 
 A TypeScript boilerplate project.
 
@@ -15,10 +15,10 @@ A TypeScript boilerplate project.
 ## Installation
 
 ```shell
-npx @dannyxcii/create-ts-app@latest my-ts-app
+npx @dannyxcii/create-ts-pkg my-ts-pkg
 ```
 
-This will create a new boilerplate application called `my-ts-app` in your current
+This will create a new boilerplate TypeScript package called `my-ts-pkg` in your current
 working directory.
 
 ## Initial Setup
@@ -29,27 +29,21 @@ After running the installer, enter your project and run `npm install`:
 cd my-ts-app && npm install
 ```
 
-This installs required development dependencies, such as `webpack`, `typescript`
-and `sass`.
+This installs required development dependencies, such as `webpack` and `typescript`.
 
 ## Build Process
 
-Your app includes a default webpack setup to compile JavaScript, TypeScript, CSS and SCSS files
-from your projects `src` directory to `public/assets`.
+Your app includes a default webpack setup to compile JavaScript and TypeScript files
+from your projects `src` directory to `dist`.
 
-Two entrypoints are included, and can be found in `webpack.config.js`:
+One entrypoint is included, and can be found in `webpack.config.js`:
 
 ```app
 // webpack.config.js
 const entries = {
     app: './src/app.ts',
-    styles: './src/styles/app.scss'
 }
 ```
-
-> Note: this uses the approach of generating separate JS/CSS files. If you prefer to import your
-> stylesheets via scripts in your other entrypoints you can remove the `IgnoreEmitPlugin` entry
-> from the plugins array
 
 ## Build Commands
 
@@ -72,11 +66,10 @@ them on save, reducing the need to repeatedly run build commands.
 
 ## Output
 
-The `webpack` build process will output the following files when a build command is ran:
+The `webpack` build process will output the following file when a build command is ran:
 
 ```txt
 public/assets/app.js
-public/assets/styles/styles.css
 ```
 
 To change the output directory for your JavaScript files, you can modify the `output` property:
@@ -85,16 +78,6 @@ To change the output directory for your JavaScript files, you can modify the `ou
 // webpack.config.js
 output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, 'public/assets/')
+    path: path.resolve(__dirname, 'dist/')
 }
-```
-
-To change the output directory for your stylesheets you can modify the path passed into the
-`MiniCssExtractPlugin` inside the `plugins` array:
-
-```javascript
-// webpack.config.js
-new MiniCssExtractPlugin({
-    filename: 'styles/[name].css',
-})
 ```
